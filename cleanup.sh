@@ -9,3 +9,4 @@ rm -rf getImportTokenResponse.json
 rm -rf ImportRootKeyResponse.json
 rm -rf PlainTextKey.bin
 rm -rf PublicKey.pem
+rm -rf encoded_key.txt

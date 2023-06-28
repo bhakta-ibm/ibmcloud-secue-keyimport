@@ -2,10 +2,10 @@
 
 # Prompt for IBM Cloud API key
 read -s -p "Enter your IBM Cloud API key: " IBM_CLOUD_API_KEY
-echo
+# echo
 
 # Log in to IBM Cloud CLI
-# ibmcloud login --apikey "$IBM_CLOUD_API_KEY"
+ibmcloud login --apikey "$IBM_CLOUD_API_KEY"
 # ibmcloud login --apikey ""
 
 # Prompt for IBM Cloud region selection
@@ -83,13 +83,13 @@ if [[ -n $INSTANCE_GUID ]]; then
                 echo "Import token payload has been saved to PublicKey.pem file."
 
                 # Prompt user to provide Key Material
-                read -p "Enter the Key Material to be encrypted: " KEY_MATERIAL
+                read -p "Enter the Key Material(base64 encoded) to be encrypted: " KEY_MATERIAL
 
                 # Generate the 256-bit key
                 # echo "Generate the 256-bit key"
                 # openssl rand 32 > PlainTextKey.bin
                 # KEY_MATERIAL=$(base64 -i PlainTextKey.bin)
-                echo "$KEY_MATERIAL" > EncodePlainTextKey.txt
+                # echo "$KEY_MATERIAL" > EncodePlainTextKey.txt
 
                 # Extract the value of 'nonce' attribute from getImportTokenResponse.json
                 NONCE=$(cat getImportTokenResponse.json | jq -r '.nonce')
@@ -211,9 +211,7 @@ if [[ -n $INSTANCE_GUID ]]; then
                 ;;
             4)
                 # Prompt the user for key alias or id
-                echo -n "To show versions, enter key alias or key id: "
-                read KEY_ALIAS_OR_ID
-
+                read -p "To show versions, enter key alias or key id: " KEY_ALIAS_OR_ID
                 ibmcloud kp key versions "$KEY_ALIAS_OR_ID"
 
                 ;;
